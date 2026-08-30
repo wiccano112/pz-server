@@ -141,5 +141,6 @@ Si revisas los logs de la consola (`server-console.txt` o `docker compose logs`)
 - **Retraso de 12 segundos al arrancar (`Router detection / UPnP`)**:
   * *Solución:* En `data/Server/<SERVER_NAME>.ini`, cambia `UPnP=true` por `UPnP=false`.
 
-*(Para diagnósticos técnicos detallados y runbooks automatizados, consulta [`docs/KNOWN_ISSUES.md`](docs/KNOWN_ISSUES.md))*.
+*(Para diagnósticos técnicos detallados y runbooks automatizados, consulta [`docs/KNOWN_ISSUES.md`](docs/KNOWN_ISSUES.md) y la guía de optimización de procesador en [`docs/CPU_TUNING_AND_COOP_GAMING.md`](docs/CPU_TUNING_AND_COOP_GAMING.md))*.
+
 

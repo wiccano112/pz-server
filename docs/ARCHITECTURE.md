@@ -18,7 +18,8 @@
   - Default: `8G` (suitable for 1-10 players with standard mod load).
   - High Capacity (20+ players or heavy map expansions): Set `MAX_RAM=16G` and host must have minimum 18GB physical RAM.
 - **Garbage Collection**: JVM G1GC configured in base container launch params.
-- **CPU Threading**: Java PZ server utilizes multi-threading for physics/chunks (`ZombieUpdatePacker`, `IsoRegion`, `WorldDictionary`).
+- **CPU Threading & Pinning**: Java PZ server utilizes multi-threading for physics/chunks (`ZombieUpdatePacker`, `IsoRegion`, `WorldDictionary`, `IsoMetaGrid`).
+  - **Hybrid Core Topology (P-Cores vs E-Cores)**: On hybrid architectures (e.g. Intel 12th-14th Gen), container pinning via `cpuset: "0-11"` in `docker-compose.yml` ensures all parallel loading threads and JVM garbage collector runs exclusively on high-frequency Performance Cores (5.2 GHz), preventing startup bottlenecks caused by Efficiency Cores.
 
 ---
 

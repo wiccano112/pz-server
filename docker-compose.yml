@@ -3,6 +3,7 @@ services:
     image: indifferentbroccoli/projectzomboid-server-docker:latest
     container_name: ${CONTAINER_NAME}
     restart: unless-stopped
+    cpuset: "0-11"
     environment:
       - SERVER_NAME=${SERVER_NAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}

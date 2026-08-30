@@ -131,3 +131,4 @@ pnpm dev                          # Default: http://localhost:3000
 - `docs/OPERATIONS.md`: Deterministic automation runbooks, RCON management, triage workflows.
 - `docs/CONFIG_REFERENCE.md`: Complete parameter dictionary for INI, SandboxVars LUA, and SQLite schemas.
 - `docs/KNOWN_ISSUES.md`: Known errors triage matrix, Build 42 log quirks, and resolution runbooks.
+- `docs/CPU_TUNING_AND_COOP_GAMING.md`: CPU pinning profiles for hybrid architectures (P-cores vs E-cores) and Host & Play co-op setup.
