@@ -42,7 +42,7 @@ Este proyecto permite levantar y administrar de manera sencilla un servidor dedi
 
 ## 🖥️ Panel Web de Administración (PZ-Panel)
 
-Para administrar el servidor gráficamente desde el navegador, existe el proyecto complementario **PZ-Panel** ubicado en `~/pz-panel`:
+Para administrar el servidor gráficamente desde el navegador, existe el proyecto complementario **[PZ-Panel](https://github.com/wiccano112/pz-panel)** (`../pz-panel`):
 
 - **Dashboard en Vivo:** Monitorización de CPU, RAM, Uptime y streaming de logs con Server-Sent Events (SSE).
 - **Gestor de Mods:** Catálogo de Steam Workshop (Build 42) y reordenamiento interactivo del orden de carga / mapas.

@@ -10,7 +10,7 @@
   - `16261/UDP`: Primary game loop & physics sync.
   - `16262/UDP`: Direct client connection handoff.
   - `27015/TCP`: Steam Query protocol & RCON administration.
-- **Web Administration Plane**: `pz-panel` located at `../pz-panel` (Next.js 16 / React 19).
+- **Web Administration Plane**: `pz-panel` located at `../pz-panel` ([GitHub Repo](https://github.com/wiccano112/pz-panel)) (Next.js 16 / React 19).
 
 ---
 
