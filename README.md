@@ -123,3 +123,23 @@ Para agregar mods manualmente al servidor, edita `data/Server/<SERVER_NAME>.ini`
 | **Monitorear logs** | `docker compose logs -f pz-server` |
 | **Ver estado del contenedor** | `docker compose ps` |
 | **Acceder a la consola interactiva** | `docker attach pz-server` (Ctrl+P, Ctrl+Q para salir sin detener) |
+
+---
+
+## 🔍 Preguntas Frecuentes y Errores Conocidos en Logs
+
+Si revisas los logs de la consola (`server-console.txt` o `docker compose logs`), es común ver ciertos mensajes que no representan fallos críticos:
+
+- **`ERROR: Mannequin zone missing properties ... objects.lua`**:
+  * *¿Qué es?* Un pequeño bug del mapa oficial de la Build 42. El motor simplemente salta la vestimenta de ese maniquí específico. No afecta la partida ni la estabilidad del servidor.
+- **`duplicate RoomDef.metaID` / `invalid room metaID ... map_meta.bin`**:
+  * *¿Qué es?* Ocurre tras actualizaciones del juego o al cargar sótanos procedimentales de la Build 42. El servidor descarta las referencias antiguas automáticamente.
+- **`[S_API FAIL] Tried to access Steam interface SteamNetworkingUtils004`**:
+  * *¿Qué es?* Una advertencia temporal de Steamworks antes de completar la conexión inicial. Inmediatamente después Steam se inicializa con normalidad.
+- **Error `NoSuchFileException: /project-zomboid-config/mods`**:
+  * *Solución:* Asegúrate de tener la carpeta `data/mods` creada en el host (`mkdir -p data/mods`).
+- **Retraso de 12 segundos al arrancar (`Router detection / UPnP`)**:
+  * *Solución:* En `data/Server/<SERVER_NAME>.ini`, cambia `UPnP=true` por `UPnP=false`.
+
+*(Para diagnósticos técnicos detallados y runbooks automatizados, consulta [`docs/KNOWN_ISSUES.md`](docs/KNOWN_ISSUES.md))*.
+

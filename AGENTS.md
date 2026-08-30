@@ -130,3 +130,4 @@ pnpm dev                          # Default: http://localhost:3000
 - `docs/ARCHITECTURE.md`: Low-level container runtime, SteamCMD integration, networking, and web panel integration.
 - `docs/OPERATIONS.md`: Deterministic automation runbooks, RCON management, triage workflows.
 - `docs/CONFIG_REFERENCE.md`: Complete parameter dictionary for INI, SandboxVars LUA, and SQLite schemas.
+- `docs/KNOWN_ISSUES.md`: Known errors triage matrix, Build 42 log quirks, and resolution runbooks.
