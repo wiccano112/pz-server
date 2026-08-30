@@ -1,0 +1,27 @@
+# ==============================================================================
+# PROJECT ZOMBOID SERVER - GIT IGNORE
+# ==============================================================================
+
+# Server Data, World Saves, Databases, Logs & Backups
+/data/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Temporary & Archive Files
+*.log
+*.tmp
+*.bak
+*.tar.gz
+*.zip

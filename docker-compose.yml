@@ -1,0 +1,19 @@
+services:
+  pz-server:
+    image: indifferentbroccoli/projectzomboid-server-docker:latest
+    container_name: ${CONTAINER_NAME}
+    restart: unless-stopped
+    environment:
+      - SERVER_NAME=${SERVER_NAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - MAX_RAM=${MAX_RAM}
+      - PUID=${PUID}
+      - PGID=${PGID}
+    ports:
+      - "${GAME_PORT}:16261/udp" # Puerto del juego
+      - "${DIRECT_PORT}:16262/udp" # Puerto de conexión directa
+      - "${RCON_PORT}:27015/tcp" # Puerto de query de Steam / RCON
+    volumes:
+      - ${DATA_PATH}:/project-zomboid-config
+
+
