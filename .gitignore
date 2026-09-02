@@ -25,3 +25,4 @@ Thumbs.db
 *.bak
 *.tar.gz
 *.zip
+shutdown-safe-server.sh
