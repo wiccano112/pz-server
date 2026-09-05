@@ -143,4 +143,8 @@ Si revisas los logs de la consola (`server-console.txt` o `docker compose logs`)
 
 *(Para diagnósticos técnicos detallados y runbooks automatizados, consulta [`docs/KNOWN_ISSUES.md`](docs/KNOWN_ISSUES.md) y la guía de optimización de procesador en [`docs/CPU_TUNING_AND_COOP_GAMING.md`](docs/CPU_TUNING_AND_COOP_GAMING.md))*.
 
+---
 
+## 💖 Agradecimientos y Créditos
+
+Un agradecimiento especial al proyecto [indifferentbroccoli/projectzomboid-server-docker](https://github.com/indifferentbroccoli/projectzomboid-server-docker) por su excelente imagen base de Docker y trabajo open source, que hizo posible levantar este proyecto casero.
