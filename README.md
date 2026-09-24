@@ -113,7 +113,28 @@ Para agregar mods manualmente al servidor, edita `data/Server/<SERVER_NAME>.ini`
 
 ---
 
-## 🛠️ Comandos Útiles
+## 🛠️ Comandos Útiles y Scripts de Automatización
+
+Puedes administrar el servidor directamente con Docker o utilizar la suite de scripts interactivos incluidos en `scripts/`:
+
+### 🎛️ Gestor Todo-en-Uno (Menú interactivo o CLI)
+```bash
+./scripts/manage.sh
+# O ejecuta directamente subcomandos:
+# ./scripts/manage.sh start|stop|restart|logs|status|players|backup|restore|soft-reset
+```
+
+### 📦 Scripts Individuales
+
+| Script | Descripción | Ejemplo de uso |
+| :--- | :--- | :--- |
+| **`scripts/backup.sh`** | Genera un respaldo comprimido `.tar.gz` o en carpeta | `./scripts/backup.sh --stop --keep 5` |
+| **`scripts/restore.sh`** | Restaura el servidor desde un archivo o directorio | `./scripts/restore.sh` *(menú interactivo)* |
+| **`scripts/list_players_and_saves.sh`** | Lista partidas, cuentas, personajes y jugadores online | `./scripts/list_players_and_saves.sh` |
+| **`scripts/status.sh`** | Healthcheck: CPU%, RAM, puertos y últimos errores | `./scripts/status.sh` |
+| **`scripts/soft_reset.sh`** | Regenera loot y zombis sin perder personajes ni autos | `./scripts/soft_reset.sh` |
+
+### Comandos Docker Directos
 
 | Acción | Comando |
 | :--- | :--- |
@@ -123,6 +144,7 @@ Para agregar mods manualmente al servidor, edita `data/Server/<SERVER_NAME>.ini`
 | **Monitorear logs** | `docker compose logs -f pz-server` |
 | **Ver estado del contenedor** | `docker compose ps` |
 | **Acceder a la consola interactiva** | `docker attach pz-server` (Ctrl+P, Ctrl+Q para salir sin detener) |
+
 
 ---
 

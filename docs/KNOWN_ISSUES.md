@@ -14,6 +14,7 @@ This document provides structured diagnostic definitions, classification, and de
 | `SteamNetworkingUtils.*before SteamAPI_Init` | Steamworks / RakNet | `NONE` | `COSMETIC_RACE` | **Ignore** (Non-blocking socket init race) |
 | `NoSuchFileException:.*\/mods` | Java DebugFileWatcher | `LOW` | `ENV_PROVISIONING` | **Fix** (Create `data/mods` host directory) |
 | `No UPnP-enabled Internet gateway found` | UPnP NAT Engine | `LOW` | `NETWORK_TIMEOUT` | **Fix** (Set `UPnP=false` in INI to save ~12s boot delay) |
+| `AnimationSet\.GetState.*AnimState not found: turning180` | Animation Engine | `LOW` | `BUILD42_VANILLA_BUG` | **Ignore** (Missing 180-degree turn anim state in base game) |
 
 ---
 
@@ -92,6 +93,17 @@ This document provides structured diagnostic definitions, classification, and de
   1. `docker compose down`
   2. Set `UPnP=false` in `data/Server/<SERVER_NAME>.ini`
   3. `docker compose up -d`
+
+---
+
+### 2.7 AnimState Not Found: `turning180`
+- **Log Pattern**:
+  ```text
+  WARN : Animation f:... st:... at AnimationSet.GetState > AnimState not found: turning180
+  ```
+- **Root Cause**: In Build 42 unstable, the animation state machine triggers a fast 180-degree turn transition when a character or zombie abruptly turns around. The vanilla animation set definition (`AnimSets`) is missing or misnamed the corresponding state entry for `turning180`.
+- **Impact**: Non-fatal warning / cosmetic. The engine fails to play the intermediate turn-around transition animation and snaps or falls back to idle/walking. Does not crash the server or corrupt world state.
+- **Deterministic Action**: **NOOP / IGNORE** (Upstream base game bug to be patched by The Indie Stone). Do not attempt manual file alterations that could trip anti-cheat checksums.
 
 ---
 
