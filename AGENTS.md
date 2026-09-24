@@ -55,13 +55,13 @@ External / Satellite Systems:
    - Modifying world/config state during container execution causes silent overwrite on server exit or memory corruption.
    - Note: `pz-panel` executes atomic file writes (`.tmp` -> rename) for sandbox vars and interacts with SQLite using `PRAGMA busy_timeout = 3000`.
 
-2. **ESCAPE DELIMITERS IN INI LISTS**:
-   - `Mods`, `WorkshopItems`, and `Map` directives in `data/Server/<SERVER_NAME>.ini` require escaped semicolon delimiter format: `item1\;item2\;item3`.
-   - Semicolons without backslashes (`item1;item2`) will truncate or corrupt parsing in the Java server backend.
+2. **DELIMITERS IN INI LISTS**:
+   - `Mods`, `WorkshopItems`, and `Map` directives in `data/Server/<SERVER_NAME>.ini` use standard semicolon delimiters: `item1;item2;item3`.
+   - Do NOT escape semicolons with backslashes (`item1\;item2`), as the Java engine treats `\` as part of the ID, breaking workshop downloads and mod loading.
 
 3. **WORKSHOP-MOD CORRELATION**:
    - Every workshop item ID added to `WorkshopItems` MUST have its matching Mod identifier in `Mods`.
-   - Map mods (e.g. `RavenCreek`) MUST precede vanilla map layers in `Map=MapModName\;Muldraugh, KY`.
+   - Map mods (e.g. `RavenCreek`) MUST precede vanilla map layers in `Map=MapModName;Muldraugh, KY`.
 
 4. **PERMISSION INTEGRITY**:
    - All files created/edited in `./data` must be readable/writable by UID 1000 / GID 1000 (`chmod 664 / chown 1000:1000` if mutated outside container).
@@ -69,6 +69,10 @@ External / Satellite Systems:
 5. **PZ-PANEL INTEROPERABILITY**:
    - `pz-panel` interacts with Docker directly via host socket/CLI (`docker stats`, `docker inspect`, `docker logs -f`).
    - SQLite access by `pz-panel` is synchronous (`node:sqlite DatabaseSync`). Ensure no locks remain during CLI batch updates.
+
+6. **PLAYER CONNECTION AUDIT**:
+   - MUST verify if players are connected (via RCON or `docker compose logs`) before executing `docker compose down`.
+   - If players are active, explicitly ask the USER for confirmation or ask them to announce a restart warning in-game before bringing the server down to avoid abrupt disconnections.
 
 ---
 
