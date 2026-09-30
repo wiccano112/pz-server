@@ -4,11 +4,13 @@
 
 # Server Data, World Saves, Databases, Logs & Backups
 /data/
+/staging/data/
 
 # Environment Variables & Secrets
 .env
 .env.local
 .env.*.local
+staging/.env
 
 # Operating System & IDE Files
 .DS_Store

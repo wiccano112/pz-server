@@ -24,18 +24,38 @@ docker port pz-server
 
 ## 2. MOD LIFECYCLE MANAGEMENT RECIPES
 
-### 2.1 Mod Addition Recipe
+> [!IMPORTANT]
+> **STAGING-FIRST MANDATE**:
+> Every mod addition or modification MUST be tested on the staging server (`pz-rpm-server-stg` in `./staging`) first to verify that it downloads, mounts, and initializes without breaking Lua or chunk physics before promoting to production.
+
+### 2.1 Mod Addition Recipe (Staging -> Production)
+
+#### Step 1: Test in Staging
 1. Acquire Steam Workshop ID (`WORKSHOP_ID`) and internal Mod ID (`MOD_ID`).
-2. Verify container state: `docker compose down`.
-3. Open `data/Server/<SERVER_NAME>.ini`.
-4. Append `\;WORKSHOP_ID` to `WorkshopItems`.
-5. Append `\;MOD_ID` to `Mods`.
-6. IF mod introduces custom map tiles:
+2. Navigate to staging: `cd staging`.
+3. Synchronize PRD configuration: `./scripts/sync_from_prd.sh`.
+4. Ensure staging is stopped: `./scripts/down.sh`.
+5. Open `staging/data/Server/pz-rpm-server-stg.ini`.
+6. Append `;WORKSHOP_ID` to `WorkshopItems` (do NOT escape with backslashes; use `;`).
+7. Append `;MOD_ID` to `Mods` (use `;`).
+8. If mod introduces custom map tiles:
    - Identify map folder name (e.g. `RavenCreek`).
-   - Prepend `MapFolder\;` before `Muldraugh, KY` in `Map=` parameter.
-   - Example: `Map=RavenCreek\;Muldraugh, KY`
-7. Start container: `docker compose up -d`.
-8. Validate via console log:
+   - Prepend `MapFolder;` before `Muldraugh, KY` in `Map=` parameter.
+   - Example: `Map=RavenCreek;Muldraugh, KY`
+9. Boot staging: `./scripts/up.sh`.
+10. Validate logs:
+    ```bash
+    ./scripts/logs.sh
+    # Audit for: "Workshop item [ID] up to date" and "MOD: [ModID] loaded"
+    ```
+
+#### Step 2: Promote to Production
+Once verified that staging boots cleanly and players can load the mod without Lua crashes:
+1. Verify active players: `docker exec pz-server rcon-cli -c /home/steam/server/rcon.yml players`.
+2. Stop production: `docker compose down`.
+3. Open `data/Server/<SERVER_NAME>.ini` and add the identical `;WORKSHOP_ID` and `;MOD_ID` entries.
+4. Start production: `docker compose up -d`.
+5. Validate init:
    ```bash
    docker compose logs --tail=200 pz-server | grep -E "(Workshop item|MOD:)"
    ```

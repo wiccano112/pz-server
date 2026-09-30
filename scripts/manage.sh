@@ -37,6 +37,8 @@ show_menu() {
     echo -e "    ${BOLD}8)${NC} Crear copia de seguridad (Backup tar.gz)"
     echo -e "    ${BOLD}9)${NC} Restaurar copia de seguridad (Restore)"
     echo -e "   ${BOLD}10)${NC} Soft Reset del mundo (Regenerar loot y zombis)"
+    echo -e "   ${BOLD}11)${NC} Actualizar a Build 42.21 Unstable (Backup + Upgrade)"
+    echo -e "   ${BOLD}12)${NC} Rollback a Build 42.20.4 Stable (Restaurar Snapshot)"
     echo ""
     echo -e "    ${BOLD}0)${NC} Salir"
     echo ""
@@ -90,13 +92,19 @@ run_action() {
         soft-reset|10)
             "$SCRIPT_DIR/soft_reset.sh"
             ;;
+        upgrade|upgrade-42-21|11)
+            "$SCRIPT_DIR/upgrade_to_42_21.sh"
+            ;;
+        rollback|rollback-42-20|12)
+            "$SCRIPT_DIR/rollback_to_42_20.sh"
+            ;;
         0|exit|quit|q)
             echo "Saliendo..."
             exit 0
             ;;
         *)
             log_error "Comando o selección no válida: $1"
-            echo "Uso: $(basename "$0") [start|stop|restart|logs|attach|status|players|backup|restore|soft-reset]"
+            echo "Uso: $(basename "$0") [start|stop|restart|logs|attach|status|players|backup|restore|soft-reset|upgrade|rollback]"
             exit 1
             ;;
     esac
@@ -111,7 +119,7 @@ fi
 # Modo interactivo
 while true; do
     show_menu
-    read -rp "Selecciona una opción [0-10]: " CHOICE
+    read -rp "Selecciona una opción [0-12]: " CHOICE
     run_action "$CHOICE"
     echo ""
     read -rp "Presiona [ENTER] para continuar..."

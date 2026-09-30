@@ -128,11 +128,35 @@ Puedes administrar el servidor directamente con Docker o utilizar la suite de sc
 
 | Script | Descripción | Ejemplo de uso |
 | :--- | :--- | :--- |
+| **`scripts/upgrade_to_42_21.sh`** | Actualiza producción a Build 42.21 Unstable con auditoría de jugadores y snapshot | `./scripts/upgrade_to_42_21.sh` |
+| **`scripts/rollback_to_42_20.sh`** | Rollback seguro a 42.20.4 restaurando el snapshot previo | `./scripts/rollback_to_42_20.sh` |
 | **`scripts/backup.sh`** | Genera un respaldo comprimido `.tar.gz` o en carpeta | `./scripts/backup.sh --stop --keep 5` |
 | **`scripts/restore.sh`** | Restaura el servidor desde un archivo o directorio | `./scripts/restore.sh` *(menú interactivo)* |
 | **`scripts/list_players_and_saves.sh`** | Lista partidas, cuentas, personajes y jugadores online | `./scripts/list_players_and_saves.sh` |
 | **`scripts/status.sh`** | Healthcheck: CPU%, RAM, puertos y últimos errores | `./scripts/status.sh` |
 | **`scripts/soft_reset.sh`** | Regenera loot y zombis sin perder personajes ni autos | `./scripts/soft_reset.sh` |
+
+---
+
+## 🧪 Entorno de Pruebas: Staging (`staging/`)
+
+Para probar nuevos mods o nuevas versiones del motor (como Build 42.21) sin poner en riesgo la partida de producción, el proyecto incluye un entorno de **Staging aislado** en [`staging/`](staging/README.md):
+
+* **Contenedor:** `pz-rpm-server-stg`
+* **Puertos paralelos:** `17261/UDP` (juego), `17262/UDP` (directo), `27025/TCP` (RCON).
+* **Cores dedicados:** `cpuset: "0-3"` (P-Cores exclusivos, 0% conflicto con producción).
+* **Límite de RAM:** `6 GB` estricto en Docker.
+
+### Cómo usar Staging:
+```bash
+cd staging
+./scripts/sync_from_prd.sh    # Sincroniza mods y reglas de producción
+./scripts/up.sh               # Inicia staging en Build 42.21 Unstable
+./scripts/logs.sh             # Monitorea la descarga e inicialización
+./scripts/down.sh             # Detiene el servidor de staging
+```
+*(Para conectarse a Staging en Steam: Betas -> `unstable` y conectarse al puerto `17261`)*.
+
 
 ### Comandos Docker Directos
 

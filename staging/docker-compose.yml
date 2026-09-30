@@ -1,0 +1,26 @@
+services:
+  pz-rpm-server-stg:
+    image: indifferentbroccoli/projectzomboid-server-docker:latest
+    container_name: ${CONTAINER_NAME:-pz-rpm-server-stg}
+    restart: "no"
+    cpuset: "${CPUSET:-0-3}"
+    mem_limit: "${MEM_LIMIT:-6g}"
+    environment:
+      - SERVER_NAME=${SERVER_NAME:-pz-rpm-server-stg}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - RCON_PASSWORD=${RCON_PASSWORD}
+      - SERVER_BRANCH=${SERVER_BRANCH:-unstable}
+      - DEFAULT_PORT=${GAME_PORT:-17261}
+      - UDP_PORT=${DIRECT_PORT:-17262}
+      - RCON_PORT=${RCON_PORT:-27025}
+      - MAX_RAM=${MAX_RAM:-6G}
+      - MEMORY_XMX_GB=${MEMORY_XMX_GB:-6}
+      - MEMORY_XMS_GB=${MEMORY_XMS_GB:-4}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+    ports:
+      - "${GAME_PORT:-17261}:${GAME_PORT:-17261}/udp"
+      - "${DIRECT_PORT:-17262}:${DIRECT_PORT:-17262}/udp"
+      - "${RCON_PORT:-27025}:${RCON_PORT:-27025}/tcp"
+    volumes:
+      - ${DATA_PATH:-./data}:/project-zomboid-config
