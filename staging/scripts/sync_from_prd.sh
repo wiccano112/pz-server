@@ -117,6 +117,11 @@ if [ -f "$PRD_SPAWNPTS" ]; then
     cp "$PRD_SPAWNPTS" "$DATA_PATH/Server/${SERVER_NAME}_spawnpoints.lua"
 fi
 
+for extra_spawn in "$PRD_DATA_PATH/Server/"*_spawnpoints.lua; do
+    [ -f "$extra_spawn" ] || continue
+    cp "$extra_spawn" "$DATA_PATH/Server/"
+done
+
 # 4. Copiar options.ini
 if [ -f "$PRD_OPTIONS" ]; then
     log_info "Copiando options.ini..."

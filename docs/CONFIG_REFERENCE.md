@@ -77,12 +77,22 @@ Lua Table Schema:
 ```lua
 function SpawnRegions()
     return {
+        -- Vanilla classic regions:
         { name = "Muldraugh, KY", file = "media/maps/Muldraugh, KY/spawnpoints.lua" },
         { name = "West Point, KY", file = "media/maps/West Point, KY/spawnpoints.lua" },
-        { name = "Riverside, KY", file = "media/maps/Riverside, KY/spawnpoints.lua" },
         { name = "Rosewood, KY", file = "media/maps/Rosewood, KY/spawnpoints.lua" },
-        -- Custom map additions:
-        { name = "Raven Creek", file = "media/maps/RavenCreek/spawnpoints.lua" },
+        { name = "Riverside, KY", file = "media/maps/Riverside, KY/spawnpoints.lua" },
+        -- Vanilla Build 42 regions:
+        { name = "Echo Creek, KY", file = "media/maps/Echo Creek, KY/spawnpoints.lua" },
+        { name = "Ekron, KY", file = "media/maps/Ekron, KY/spawnpoints.lua" },
+        { name = "Fallas Lake, KY", file = "media/maps/Fallas Lake, KY/spawnpoints.lua" },
+        { name = "Irvington, KY", file = "media/maps/Irvington, KY/spawnpoints.lua" },
+        { name = "Brandenburg, KY", file = "media/maps/Brandenburg, KY/spawnpoints.lua" },
+        { name = "March Ridge, KY", file = "media/maps/March Ridge, KY/spawnpoints.lua" },
+        -- Optional Vanilla B42 region:
+        -- { name = "Valley Station, KY", file = "media/maps/Valley Station, KY/spawnpoints.lua" },
+        -- Server-side custom spawnpoints (no Workshop mod required):
+        { name = "Louisville, KY", serverfile = "NobaraZomboid_louisville_spawnpoints.lua" },
     }
 end
 ```

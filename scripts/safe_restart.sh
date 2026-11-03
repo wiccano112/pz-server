@@ -73,10 +73,10 @@ while [ "${ATTEMPT}" -le "${MAX_ATTEMPTS}" ]; do
         docker exec "${CONTAINER_NAME}" rcon-cli -a "127.0.0.1:${RCON_PORT:-27015}" -p "${RCON_PASS}" "save" || true
         sleep 5
 
-        # 2. Reinicio con Compose
+        # 2. Reinicio con Compose (con 60s de gracia para vaciado de DB/chunks)
         log_file "Ejecutando reinicio del contenedor..."
         cd "$PROJECT_ROOT"
-        $DOCKER_COMPOSE_CMD restart "$CONTAINER_NAME"
+        $DOCKER_COMPOSE_CMD restart -t 60 "$CONTAINER_NAME"
 
         log_file "${GREEN}[EXITO]${NC} Servidor reiniciado correctamente y mundo sincronizado."
         exit 0
